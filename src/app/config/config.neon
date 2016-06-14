@@ -1,0 +1,39 @@
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# https://nette.org/security-warning
+
+parameters:
+
+
+php:
+    date.timezone: Europe/Prague
+
+
+application:
+    errorPresenter: Error
+    mapping:
+        *: App\*Module\Presenters\*Presenter
+
+
+session:
+    expiration: 14 days
+
+extensions:
+    console: Kdyby\Console\DI\ConsoleExtension
+    events: Kdyby\Events\DI\EventsExtension
+    annotations: Kdyby\Annotations\DI\AnnotationsExtension
+    doctrine: Kdyby\Doctrine\DI\OrmExtension
+
+services:
+    router: App\RouterFactory::createRouter
+
+    - App\Model\Users\Authenticator
+    - App\Model\Users\UserRepository
+
+    - App\Components\BaseFormFactory
+    - App\Components\RegistrationFormFactory
+    - App\Components\LoginFormFactory
+    - App\Components\ChangePasswordFormFactory
+    - App\Components\LostPasswordFormFactory
+
+    - App\Model\LostPasswordResetMessageSender
+    - App\Model\MessageSenderSettings('simple-shop', 'info@hc4l.cz', '')
