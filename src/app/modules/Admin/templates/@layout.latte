@@ -10,7 +10,7 @@
 <body>
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
-	<p>User control: <a n:href="Sign:out">odhlásit</a></p>
+	<p>Přihlášen: {$user->getIdentity()->getEmail()} <a n:href="Sign:out">odhlásit</a></p>
 
 	<ul>
 		<li>
