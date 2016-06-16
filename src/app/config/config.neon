@@ -13,7 +13,6 @@ application:
     mapping:
         *: App\*Module\Presenters\*Presenter
 
-
 session:
     expiration: 14 days
 
@@ -22,6 +21,17 @@ extensions:
     events: Kdyby\Events\DI\EventsExtension
     annotations: Kdyby\Annotations\DI\AnnotationsExtension
     doctrine: Kdyby\Doctrine\DI\OrmExtension
+    gedmo: Rixxi\Gedmo\DI\OrmExtension
+
+gedmo:
+    treeable: on
+
+doctrine:
+    types:
+        bit: Doctrine\DBAL\Types\BooleanType
+
+    filters:
+        soft-deleteable: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
 
 services:
     router: App\RouterFactory::createRouter

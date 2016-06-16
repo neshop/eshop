@@ -16,7 +16,8 @@
 		"latte/latte": "^2.3",
 		"tracy/tracy": "^2.3",
 		"kdyby/doctrine": "^3.0",
-		"majkl578/nette-identity-doctrine": "^2.2"
+		"majkl578/nette-identity-doctrine": "^2.2",
+		"rixxi/gedmo": "^1.0"
 	},
 	"require-dev": {
 		"nette/tester": "^1.6",

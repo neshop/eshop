@@ -9,6 +9,7 @@ namespace App\Model\Products;
 use App\Model\ORM\Attributes\SEO;
 use Doctrine\ORM\Mapping AS ORM;
 use Kdyby\Doctrine\Entities\Attributes\UniversallyUniqueIdentifier;
+use Nette\Object;
 
 /**
  * Class Product
@@ -16,7 +17,7 @@ use Kdyby\Doctrine\Entities\Attributes\UniversallyUniqueIdentifier;
  * @ORM\Entity()
  * @ORM\Table(name="product")
  */
-class Product
+class Product extends Object
 {
     use UniversallyUniqueIdentifier;
     use SEO;
