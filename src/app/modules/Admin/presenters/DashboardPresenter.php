@@ -6,9 +6,9 @@
 
 namespace App\AdminModule\Presenters;
 
-use Nette\Application\UI\Presenter;
+use App\Presenters\SecuredPresenter;
 
-class DashboardPresenter extends Presenter
+class DashboardPresenter extends SecuredPresenter
 {
 
 }

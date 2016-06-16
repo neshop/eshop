@@ -10,27 +10,6 @@
 <body>
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
-	<p>User control: <a n:href="Sign:out">odhlásit</a></p>
-
-	<ul>
-		<li>
-			Produkty
-			<ul>
-				<li><a href="#">Přehled</a></li>
-				<li><a href="#">Vložit produkt</a></li>
-				<li><a href="#">Vložit kategorii</a></li>
-			</ul>
-		</li>
-		<li>
-			Objednávky
-			<ul>
-				<li><a href="#">Přehled</a></li>
-				<li><a href="#">Vytvořit novou</a></li>
-			</ul>
-		</li>
-
-	</ul>
-
 	{include content}
 
 	{block scripts}
