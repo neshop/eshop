@@ -40,11 +40,14 @@ services:
     - App\Model\Users\Authenticator
     - App\Model\Users\UserRepository
 
-    - App\Components\BaseFormFactory
+    - Nextras\Forms\Rendering\Bs3FormRenderer
+
+    - App\Components\BaseForm
     - App\Components\RegistrationFormFactory
     - App\Components\LoginFormFactory
     - App\Components\ChangePasswordFormFactory
     - App\Components\LostPasswordFormFactory
+    - App\Components\ProductFormFactory
 
     - App\Model\LostPasswordResetMessageSender
     - App\Model\MessageSenderSettings('simple-shop', 'info@hc4l.cz', '')

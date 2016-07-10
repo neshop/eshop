@@ -27,4 +27,20 @@ trait SEO
      * @var string
      */
     private $seoTitle;
+
+    public function setSEO($title, $keywords, $description)
+    {
+        $this->seoTitle = $title;
+        $this->seoKeywords = $keywords;
+        $this->seoDescription = $description;
+    }
+
+    protected function seoToForm()
+    {
+        return [
+            'seoTitle' => $this->seoTitle,
+            'seoKeywords' => $this->seoKeywords,
+            'seoDescription' => $this->seoDescription,
+        ];
+    }
 }

@@ -6,9 +6,18 @@
 
 namespace App\AdminModule\Presenters;
 
+use App\Components\ProductFormFactory;
 use App\Presenters\SecuredPresenter;
 
 class ProductPresenter extends SecuredPresenter
 {
+    /** @var ProductFormFactory @inject */
+    public $productFormFactory;
 
+    protected function createComponentProductForm()
+    {
+        $control = $this->productFormFactory->create(null);
+
+        return $control;
+    }
 }

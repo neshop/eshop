@@ -7,7 +7,7 @@
 namespace App\Model\Products;
 
 use App\Model\ORM\Attributes\SEO;
-use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\UniversallyUniqueIdentifier;
 use Nette\Object;
 
@@ -39,4 +39,17 @@ class Product extends Object
      * @var boolean
      */
     private $active;
+
+    public function toForm()
+    {
+        $data = [
+            'name' => $this->name,
+            'description' => $this->description,
+            'active' => $this->active,
+        ];
+
+        $data = array_merge($data, $this->seoToForm());
+
+        return $data;
+    }
 }
