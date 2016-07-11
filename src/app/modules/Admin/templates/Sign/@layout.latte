@@ -4,16 +4,25 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 
+	<link rel="stylesheet" href="{$basePath}/bower_components/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="{$basePath}/bower_components/bootstrap/dist/css/bootstrap-theme.css" />
+
 	<title>{ifset title}{include title|striptags} | {/ifset}Nette Web</title>
 </head>
 
 <body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
-	{include content}
+	<div class="container">
 
-	{block scripts}
-	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
-	{/block}
+		<div n:foreach="$flashes as $flash" n:class="alert, alert-$flash->type">{$flash->message}</div>
+
+		{include content}
+
+		{block scripts}
+			<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+		{/block}
+
+	</div>
+
 </body>
 </html>

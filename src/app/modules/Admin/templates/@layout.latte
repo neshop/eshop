@@ -4,37 +4,62 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 
+	<link rel="stylesheet" href="{$basePath}/bower_components/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="{$basePath}/bower_components/bootstrap/dist/css/bootstrap-theme.css" />
+
 	<title>{ifset title}{include title|striptags} | {/ifset}Nette Web</title>
 </head>
 
 <body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
-	<p>Přihlášen: {$user->getIdentity()->getEmail()} <a n:href="Sign:out">odhlásit</a></p>
+	<div class="container">
 
-	<ul>
-		<li>
-			Produkty
-			<ul>
-				<li><a n:href="Product:default">Přehled</a></li>
-				<li><a n:href="Product:addProduct">Vložit produkt</a></li>
-				<li><a n:href="Product:addCategory">Vložit kategorii</a></li>
-			</ul>
-		</li>
-		<li>
-			Objednávky
-			<ul>
-				<li><a n:href="Order:default">Přehled</a></li>
-				<li><a n:href="Order:create">Vytvořit novou</a></li>
-			</ul>
-		</li>
+		<div n:foreach="$flashes as $flash" n:class="alert, alert-$flash->type">{$flash->message}</div>
 
-	</ul>
+		<div class="navbar navbar-default">
+			<div class="container-fluid">
 
-	{include content}
+				<div class="collapse navbar-collapse">
 
-	{block scripts}
-	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
-	{/block}
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Produkty <span class="caret"></span></a>
+
+							<ul class="dropdown-menu">
+								<li><a n:href="Product:default">Přehled</a></li>
+								<li><a n:href="Product:addProduct">Vložit produkt</a></li>
+								<li><a n:href="Product:addCategory">Vložit kategorii</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Objednávky <span class="caret"></span></a>
+
+							<ul class="dropdown-menu">
+								<li><a n:href="Order:default">Přehled</a></li>
+								<li><a n:href="Order:create">Vytvořit novou</a></li>
+							</ul>
+						</li>
+
+					</ul>
+
+					<p class="navbar-text navbar-right">Přihlášen: {$user->getIdentity()->getEmail()} <a n:href="Sign:out">odhlásit</a></p>
+
+				</div>
+
+			</div>
+		</div>
+
+		{include content}
+
+		{block scripts}
+			<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+			<script src="{$basePath}/bower_components/jquery/dist/jquery.js"></script>
+			<script src="{$basePath}/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+		{/block}
+
+	</div>
+
 </body>
 </html>
