@@ -17,6 +17,10 @@ class ProductPresenter extends SecuredPresenter
     protected function createComponentProductForm()
     {
         $control = $this->productFormFactory->create(null);
+        $control->onSuccess[] = function ($form, $product) {
+            $this->flashMessage('Produkt byl úspěšně vytvořen.', 'success');
+            $this->redirect('this');
+        };
 
         return $control;
     }

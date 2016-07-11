@@ -76,7 +76,7 @@ class ProductForm extends BaseControl
         }
         else
         {
-            $product = new Product();
+            $product = new Product($values->name, $values->description, $values->active);
             $this->entityManager->persist($product);
         }
 

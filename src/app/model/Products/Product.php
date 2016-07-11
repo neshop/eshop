@@ -40,6 +40,19 @@ class Product extends Object
      */
     private $active;
 
+    /**
+     * Product constructor.
+     * @param string $name
+     * @param string $description
+     * @param bool $active
+     */
+    public function __construct($name, $description, $active)
+    {
+        $this->name = $name;
+        $this->description = $description;
+        $this->active = $active;
+    }
+
     public function toForm()
     {
         $data = [
