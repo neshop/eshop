@@ -16,6 +16,9 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "ublaboo-datagrid": "^4.4.3",
+    "bootstrap-select": "^1.10.0",
+    "font-awesome": "^4.6.3"
   }
 }

@@ -73,6 +73,8 @@ class ProductForm extends BaseControl
         if ($this->product)
         {
             $product = $this->product;
+            $product->changeTexts($values->name, $values->description);
+            $product->changeState($values->active);
         }
         else
         {

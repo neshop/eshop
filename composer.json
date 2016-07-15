@@ -18,7 +18,8 @@
 		"kdyby/doctrine": "^3.0",
 		"majkl578/nette-identity-doctrine": "dev-master",
 		"rixxi/gedmo": "^1.0",
-		"nextras/forms": "^1.6"
+		"nextras/forms": "^1.6",
+		"ublaboo/datagrid": "^4.4"
 	},
 	"require-dev": {
 		"nette/tester": "^1.6",

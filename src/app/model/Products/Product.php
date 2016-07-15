@@ -9,7 +9,7 @@ namespace App\Model\Products;
 use App\Model\ORM\Attributes\SEO;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\UniversallyUniqueIdentifier;
-use Nette\Object;
+use Nette\SmartObject;
 
 /**
  * Class Product
@@ -17,8 +17,9 @@ use Nette\Object;
  * @ORM\Entity()
  * @ORM\Table(name="product")
  */
-class Product extends Object
+class Product
 {
+    use SmartObject;
     use UniversallyUniqueIdentifier;
     use SEO;
 
@@ -52,6 +53,39 @@ class Product extends Object
         $this->description = $description;
         $this->active = $active;
     }
+
+    /**
+     * @param string $name
+     * @param string $description
+     */
+    public function changeTexts($name, $description)
+    {
+        $this->name = $name;
+        $this->description = $description;
+    }
+
+    public function changeState($newState)
+    {
+        $this->active = $newState ? true : false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isActive()
+    {
+        return $this->active;
+    }
+
+
 
     public function toForm()
     {
