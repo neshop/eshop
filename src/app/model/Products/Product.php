@@ -36,6 +36,12 @@ class Product
     private $description;
 
     /**
+     * @ORM\Column(type="text",name="ingredients",nullable=true)
+     * @var string
+     */
+    private $ingredients;
+
+    /**
      * @ORM\Column(type="boolean",name="is_active",nullable=false)
      * @var boolean
      */
@@ -46,22 +52,26 @@ class Product
      * @param string $name
      * @param string $description
      * @param bool $active
+     * @param string $ingredients
      */
-    public function __construct($name, $description, $active)
+    public function __construct($name, $description, $active, $ingredients)
     {
         $this->name = $name;
         $this->description = $description;
         $this->active = $active;
+        $this->ingredients = $ingredients;
     }
 
     /**
      * @param string $name
      * @param string $description
+     * @param string $ingredients
      */
-    public function changeTexts($name, $description)
+    public function changeTexts($name, $description, $ingredients)
     {
         $this->name = $name;
         $this->description = $description;
+        $this->ingredients = $ingredients;
     }
 
     public function changeState($newState)
@@ -93,6 +103,7 @@ class Product
             'name' => $this->name,
             'description' => $this->description,
             'active' => $this->active,
+            'ingredients' => $this->ingredients,
         ];
 
         $data = array_merge($data, $this->seoToForm());

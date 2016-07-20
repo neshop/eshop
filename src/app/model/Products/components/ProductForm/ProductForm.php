@@ -48,6 +48,9 @@ class ProductForm extends BaseControl
         $form->addTextArea('description', 'Popisek')
             ->setRequired(true);
 
+        $form->addTextArea('ingredients', 'Složení')
+            ->setRequired(true);
+
         $form->addText('seoTitle', 'SEO title');
         $form->addText('seoKeywords', 'SEO keywords');
         $form->addText('seoDescription', 'SEO description');
@@ -62,7 +65,7 @@ class ProductForm extends BaseControl
 
         if ($this->product)
         {
-            $form->setValues($this->product->toForm());
+            $form->setDefaults($this->product->toForm());
         }
 
         return $form;
@@ -73,12 +76,12 @@ class ProductForm extends BaseControl
         if ($this->product)
         {
             $product = $this->product;
-            $product->changeTexts($values->name, $values->description);
+            $product->changeTexts($values->name, $values->description, $values->ingredients);
             $product->changeState($values->active);
         }
         else
         {
-            $product = new Product($values->name, $values->description, $values->active);
+            $product = new Product($values->name, $values->description, $values->active, $values->ingredients);
             $this->entityManager->persist($product);
         }
 
