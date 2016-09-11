@@ -1,4 +1,25 @@
 {block content}
-<div id="banner">
-    <h1 n:block=title>Homepage</h1>
-</div>
+<h1 n:block=title>Levný kokosový olej</h1>
+
+{if $product && $product->isActive()}
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <h2>{$product->getName()}</h2>
+
+            <p>Cena: {$product->getPrice()} {$product->getCurrency()->getAbbr()}</p>
+
+        </div>
+        <div class="col-md-6">
+
+            {control buyForm}
+
+        </div>
+    </div>
+
+{else}
+
+    <p>Prodej kokosového oleje je momentálně pozastaven.</p>
+
+{/if}

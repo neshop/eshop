@@ -27,7 +27,7 @@ class BaseForm extends BaseControl implements BaseFormFactory
     }
 
     /**
-     * @return Form
+     * @return BaseForm
      */
     public function create()
     {

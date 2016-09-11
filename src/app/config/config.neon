@@ -22,6 +22,7 @@ extensions:
     annotations: Kdyby\Annotations\DI\AnnotationsExtension
     doctrine: Kdyby\Doctrine\DI\OrmExtension
     gedmo: Rixxi\Gedmo\DI\OrmExtension
+    doctrine2identity: Majkl578\NetteAddons\Doctrine2Identity\DI\IdentityExtension
 
 gedmo:
     treeable: on
@@ -39,11 +40,19 @@ services:
     - App\Model\Users\Authenticator
     - App\Model\Users\UserRepository
 
-    - App\Components\BaseFormFactory
+    - Nextras\Forms\Rendering\Bs3FormRenderer
+
+    - App\Components\BaseForm
     - App\Components\RegistrationFormFactory
     - App\Components\LoginFormFactory
     - App\Components\ChangePasswordFormFactory
     - App\Components\LostPasswordFormFactory
+    - App\Components\ProductFormFactory
+    - App\Components\BuyFormFactory
 
     - App\Model\LostPasswordResetMessageSender
     - App\Model\MessageSenderSettings('simple-shop', 'info@hc4l.cz', '')
+
+    -
+        class: App\Model\Fixtures\DefaultData
+        tags: [kdyby.console.command]

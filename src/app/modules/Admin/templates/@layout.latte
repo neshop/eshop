@@ -4,16 +4,91 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 
+	<link rel="stylesheet" type="text/css" href="{$basePath}/bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="{$basePath}/bower_components/bootstrap/dist/css/bootstrap-theme.css">
+	<link rel="stylesheet" type="text/css" href="{$basePath}/bower_components/happy/dist/happy.css">
+	<link rel="stylesheet" type="text/css" href="{$basePath}/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css">
+	<link rel="stylesheet" type="text/css" href="{$basePath}/bower_components/ublaboo-datagrid/assets/dist/datagrid.css">
+	<link rel="stylesheet" type="text/css" href="{$basePath}/bower_components/ublaboo-datagrid/assets/dist/datagrid-spinners.css">
+	<link rel="stylesheet" type="text/css" href="{$basePath}/bower_components/bootstrap-select/dist/css/bootstrap-select.css">
+	<link rel="stylesheet" type="text/css" href="{$basePath}/bower_components/font-awesome/css/font-awesome.css">
+
 	<title>{ifset title}{include title|striptags} | {/ifset}Nette Web</title>
 </head>
 
 <body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
-	{include content}
+	<div class="container">
 
-	{block scripts}
-	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
-	{/block}
+		{snippet flashes}
+			<div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">{$flash->message}</div>
+		{/snippet}
+
+		<div class="navbar navbar-default">
+			<div class="container-fluid">
+
+				<div class="collapse navbar-collapse">
+
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Produkty <span class="caret"></span></a>
+
+							<ul class="dropdown-menu">
+								<li><a n:href="Product:default">Přehled</a></li>
+								<li><a n:href="Product:addProduct">Vložit produkt</a></li>
+								<li><a n:href="Product:addCategory">Vložit kategorii</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Objednávky <span class="caret"></span></a>
+
+							<ul class="dropdown-menu">
+								<li><a n:href="Order:default">Přehled</a></li>
+								<li><a n:href="Order:create">Vytvořit novou</a></li>
+							</ul>
+						</li>
+
+					</ul>
+
+					<p class="navbar-text navbar-right">Přihlášen: {$user->getIdentity()->getEmail()} <a n:href="Sign:out">odhlásit</a></p>
+
+				</div>
+
+			</div>
+		</div>
+
+		{include content}
+
+		{block scripts}
+
+			<script src="{$basePath}/bower_components/jquery/dist/jquery.js"></script>
+			<script src="{$basePath}/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+			<script src="{$basePath}/bower_components/nette-forms/src/assets/netteForms.js"></script>
+			<script src="{$basePath}/bower_components/nette.ajax.js/nette.ajax.js"></script>
+
+			<!-- Use this tiny js for that pretty checkboxes (https://github.com/paveljanda/happy) -->
+			<script src="{$basePath}/bower_components/happy/dist/happy.js"></script>
+			<script src="{$basePath}/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+			<script src="{$basePath}/bower_components/jquery-ui-sortable/jquery-ui-sortable.js"></script>
+			<script src="{$basePath}/bower_components/ublaboo-datagrid/assets/dist/datagrid.js"></script>
+
+			<!-- Use this little extension for ajax spinners -->
+			<script src="{$basePath}/bower_components/ublaboo-datagrid/assets/dist/datagrid-spinners.js"></script>
+
+
+			<!-- Include bootstrap-select.js when using FilterMultiSelect (silviomoreto.github.io/bootstrap-select) -->
+			<script src="{$basePath}/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+
+			<script>
+				$.nette.init();
+			</script>
+
+		{/block}
+
+	</div>
+
 </body>
 </html>

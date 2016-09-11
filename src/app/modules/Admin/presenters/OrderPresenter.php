@@ -8,7 +8,7 @@ namespace App\AdminModule\Presenters;
 
 use App\Presenters\SecuredPresenter;
 
-class DashboardPresenter extends SecuredPresenter
+class OrderPresenter extends SecuredPresenter
 {
 
 }
