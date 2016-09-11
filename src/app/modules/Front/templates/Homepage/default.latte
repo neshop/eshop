@@ -1,45 +1,4 @@
 {block content}
 <h1 n:block=title>Eshop homepage</h1>
 
-{if $categoryTree}
-
-    <h2>Kategorie zboží</h2>
-
-    <ul>
-        {var $temp = 1}
-
-        {foreach $categoryTree as $node}
-
-            {if $node['lvl'] > $temp}
-
-                <ul>
-
-                {var $temp = $node['lvl']}
-
-            {elseif ($node['lvl'] == $temp) && (!$iterator->isFirst())}
-
-                </li>
-
-            {elseif $node['lvl'] < $temp}
-
-                </li>
-
-                {var $a = str_repeat('</ul></li>', $temp - $node['lvl'])}
-                {$a|noescape}
-                {var $temp = $node['lvl']}
-
-            {/if}
-
-
-            <li><a href="#{$node['id']}">{$node['title']}</a>
-
-        {/foreach}
-
-        </li>
-
-        {var $a = str_repeat('</ul></li>', $temp - 1)}
-        {$a|noescape}
-
-    </ul>
-
-{/if}
+{control categoryTree}

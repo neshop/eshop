@@ -1,0 +1,44 @@
+{if $categoryTree}
+
+    <h2>Kategorie</h2>
+
+    <ul>
+
+    {var $temp = 1}
+
+    {foreach $categoryTree as $node}
+
+        {if $node['lvl'] > $temp}
+
+            <ul>
+
+            {var $temp = $node['lvl']}
+
+        {elseif ($node['lvl'] == $temp) && (!$iterator->isFirst())}
+
+            </li>
+
+        {elseif $node['lvl'] < $temp}
+
+            </li>
+
+            {var $end = str_repeat('</ul></li>', $temp - $node['lvl'])}
+            {$end|noescape}
+            {var $temp = $node['lvl']}
+
+        {/if}
+
+
+        <li><a href="#{$node['id']}">{$node['title']}</a>
+
+    {/foreach}
+
+    </li>
+
+    {var $end = str_repeat('</ul></li>', $temp - 1)}
+
+    {$end|noescape}
+
+    </ul>
+
+{/if}
