@@ -1,25 +1,45 @@
 {block content}
-<h1 n:block=title>Levný kokosový olej</h1>
+<h1 n:block=title>Eshop homepage</h1>
 
-{if $product && $product->isActive()}
+{if $categoryTree}
 
-    <div class="row">
-        <div class="col-md-6">
+    <h2>Kategorie zboží</h2>
 
-            <h2>{$product->getName()}</h2>
+    <ul>
+        {var $temp = 1}
 
-            <p>Cena: {$product->getPrice()} {$product->getCurrency()->getAbbr()}</p>
+        {foreach $categoryTree as $node}
 
-        </div>
-        <div class="col-md-6">
+            {if $node['lvl'] > $temp}
 
-            {control buyForm}
+                <ul>
 
-        </div>
-    </div>
+                {var $temp = $node['lvl']}
 
-{else}
+            {elseif ($node['lvl'] == $temp) && (!$iterator->isFirst())}
 
-    <p>Prodej kokosového oleje je momentálně pozastaven.</p>
+                </li>
+
+            {elseif $node['lvl'] < $temp}
+
+                </li>
+
+                {var $a = str_repeat('</ul></li>', $temp - $node['lvl'])}
+                {$a|noescape}
+                {var $temp = $node['lvl']}
+
+            {/if}
+
+
+            <li><a href="#{$node['id']}">{$node['title']}</a>
+
+        {/foreach}
+
+        </li>
+
+        {var $a = str_repeat('</ul></li>', $temp - 1)}
+        {$a|noescape}
+
+    </ul>
 
 {/if}

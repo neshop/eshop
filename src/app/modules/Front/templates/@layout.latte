@@ -14,6 +14,40 @@
 
 	<div class="container">
 
+		<div class="row">
+			<div class="col-md-6">
+
+				<h3>Hlavička</h3>
+
+				<a n:href="Homepage:">Homepage</a>
+				<a href="#">Obchodní podmínky</a>
+				<a href="#">O nás</a>
+				<a href="#">Kontakt</a>
+
+			</div>
+			<div class="col-md-3">
+
+				<h3>Košík</h3>
+
+				<b>5</b> položek<br>
+				<b>1234</b> Kč
+
+				{*control cartInfo*}
+
+			</div>
+			<div class="col-md-3">
+
+				<h3>Uživatel</h3>
+
+				{*control userInfo*}
+
+				<a n:href="Sign:in">Přihlásit se</a><br>
+				<a n:href="Sign:up">Registrace</a>
+
+			</div>
+
+		</div>
+
 		<div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">{$flash->message}</div>
 
 		{include content}

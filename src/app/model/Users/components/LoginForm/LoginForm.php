@@ -7,6 +7,7 @@
 namespace App\Components;
 
 use Nette\Application\UI\Control;
+use Nette\Forms\Form;
 use Nette\Security\AuthenticationException;
 use Nette\Security\User;
 
@@ -33,10 +34,11 @@ class LoginForm extends Control
         $form = $this->baseFormFactory->create();
 
         $form->addText('email', 'E-mail')
-            ->setRequired();
+            ->setRequired('Vyplňte prosím platný e-mail')
+            ->addRule(Form::EMAIL, 'Vyplňte prosím platný e-mail');
 
         $form->addPassword('password', 'Heslo')
-            ->setRequired();
+            ->setRequired('Vyplňte prosím heslo');
 
         $form->addSubmit('send', 'Přihlásit se');
 

@@ -15,28 +15,15 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
     /** @var EntityManager @inject */
     public $entityManager;
 
-    /** @var BuyFormFactory @inject */
-    public $buyFormFactory;
-
-    /** @var Product */
-    private $product;
-
     public function actionDefault()
     {
-        $repository = $this->entityManager->getRepository(Product::class);
-        $product = $repository->findOneBy([]);
-        $this->product = $product;
-    }
+        /** @var NestedTreeRepository $categoryRepository */
+        $categoryRepository = $this->entityManager->getRepository(Category::class);
 
-    public function renderDefault()
-    {
+        $tree = $categoryRepository->getNodesHierarchy();
+
         $template = $this->getTemplate();
-        $template->product = $this->product;
+        $template->categoryTree = $tree;
     }
 
-    public function createComponentBuyForm()
-    {
-        $control = $this->buyFormFactory->create();
-        return $control;
-    }
 }
