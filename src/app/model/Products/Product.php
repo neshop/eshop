@@ -6,6 +6,7 @@
 
 namespace App\Model\Products;
 
+use App\Model\Eshop\Currency;
 use App\Model\ORM\Attributes\SEO;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\UniversallyUniqueIdentifier;
@@ -48,18 +49,35 @@ class Product
     private $active;
 
     /**
+     * @ORM\Column(type="float",name="price",nullable=false)
+     * @var float
+     */
+    private $price;
+
+    /**
+     * @var Currency
+     * @ORM\ManyToOne(targetEntity="App\Model\Eshop\Currency")
+     * @ORM\JoinColumn(name="id_currency", referencedColumnName="iso")
+     */
+    private $currency;
+
+    /**
      * Product constructor.
      * @param string $name
      * @param string $description
      * @param bool $active
      * @param string $ingredients
+     * @param float $price
+     * @param Currency $currency
      */
-    public function __construct($name, $description, $active, $ingredients)
+    public function __construct($name, $description, $active, $ingredients, $price, Currency $currency)
     {
         $this->name = $name;
         $this->description = $description;
         $this->active = $active;
         $this->ingredients = $ingredients;
+        $this->price = $price;
+        $this->currency = $currency;
     }
 
     /**
@@ -79,6 +97,12 @@ class Product
         $this->active = $newState ? true : false;
     }
 
+    public function changePrice($price, Currency $currency)
+    {
+        $this->price = $price;
+        $this->currency = $currency;
+    }
+
     /**
      * @return string
      */
@@ -95,6 +119,15 @@ class Product
         return $this->active;
     }
 
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
 
 
     public function toForm()
@@ -104,6 +137,7 @@ class Product
             'description' => $this->description,
             'active' => $this->active,
             'ingredients' => $this->ingredients,
+            'price' => $this->price,
         ];
 
         $data = array_merge($data, $this->seoToForm());

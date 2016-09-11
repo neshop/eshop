@@ -48,6 +48,11 @@ services:
     - App\Components\ChangePasswordFormFactory
     - App\Components\LostPasswordFormFactory
     - App\Components\ProductFormFactory
+    - App\Components\BuyFormFactory
 
     - App\Model\LostPasswordResetMessageSender
     - App\Model\MessageSenderSettings('simple-shop', 'info@hc4l.cz', '')
+
+    -
+        class: App\Model\Fixtures\DefaultData
+        tags: [kdyby.console.command]

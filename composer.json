@@ -19,11 +19,11 @@
 		"majkl578/nette-identity-doctrine": "dev-master",
 		"rixxi/gedmo": "^1.0",
 		"nextras/forms": "^1.6",
-		"ublaboo/datagrid": "^4.4"
+		"ublaboo/datagrid": "^4.4",
+		"doctrine/data-fixtures": "^1.2"
 	},
 	"require-dev": {
-		"nette/tester": "^1.6",
-		"squizlabs/php_codesniffer": "2.*"
+		"nette/tester": "^1.6"
 	},
 	"replace": {
 		"nette/nette": "2.3.5"

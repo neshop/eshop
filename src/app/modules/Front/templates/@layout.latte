@@ -4,23 +4,24 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 
-	<title>{ifset title}{include title|striptags} | {/ifset}Nette Web</title>
+	<link rel="stylesheet" type="text/css" href="{$basePath}/bower_components/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="{$basePath}/bower_components/bootstrap/dist/css/bootstrap-theme.css">
+
+	<title>{ifset title}{include title|striptags} | {/ifset}Kokosový olej</title>
 </head>
 
 <body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
-	<a n:href="Homepage:">Simple SHOP</a>
+	<div class="container">
 
-	<ul>
-		<li><a n:href="Sign:in">Přihlásit se</a></li>
-		<li><a n:href="Sign:up">Registrovat</a></li>
-	</ul>
+		<div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">{$flash->message}</div>
 
-	{include content}
+		{include content}
+
+	</div>
 
 	{block scripts}
-	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+		<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
 	{/block}
 </body>
 </html>

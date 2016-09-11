@@ -53,6 +53,9 @@ class ProductPresenter extends SecuredPresenter
         $grid->addColumnText('name', 'Název')
             ->setSortable(true);
 
+        $grid->addColumnNumber('price', 'Cena CZK')
+            ->setSortable(true);
+
         $grid->addColumnStatus('active', 'Stav')
             ->setSortable(true)
             ->setCaret(false)

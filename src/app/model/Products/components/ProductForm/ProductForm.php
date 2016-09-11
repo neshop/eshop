@@ -6,6 +6,7 @@
 
 namespace App\Components;
 
+use App\Model\Eshop\Currency;
 use App\Model\Products\Product;
 use Doctrine\ORM\EntityManager;
 
@@ -73,15 +74,26 @@ class ProductForm extends BaseControl
 
     public function processForm($form, $values)
     {
+        /** @var Currency $currency */
+        $currency = $this->entityManager->find(Currency::class, 'CZK');
+
         if ($this->product)
         {
             $product = $this->product;
             $product->changeTexts($values->name, $values->description, $values->ingredients);
             $product->changeState($values->active);
+            $product->changePrice($values->price, $currency);
         }
         else
         {
-            $product = new Product($values->name, $values->description, $values->active, $values->ingredients);
+            $product = new Product(
+                $values->name,
+                $values->description,
+                $values->active,
+                $values->ingredients,
+                $values->price,
+                $currency
+            );
             $this->entityManager->persist($product);
         }
 
