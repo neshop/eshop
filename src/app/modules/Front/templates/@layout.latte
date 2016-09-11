@@ -29,8 +29,10 @@
 
 				<h3>Košík</h3>
 
-				<b>5</b> položek<br>
-				<b>1234</b> Kč
+				<b>{$cartInfo['items']|number}</b> položek<br>
+				<b>{$cartInfo['price']|number:2:'.',' '}</b> Kč<br>
+
+				<a href="#">Zobrazit</a>
 
 				{*control cartInfo*}
 

@@ -40,6 +40,9 @@ services:
     - App\Model\Users\Authenticator
     - App\Model\Users\UserRepository
 
+    - App\Model\Eshop\CartSessionStorage
+    - App\Model\Eshop\Cart
+
     - Nextras\Forms\Rendering\Bs3FormRenderer
 
     - App\Components\BaseForm
