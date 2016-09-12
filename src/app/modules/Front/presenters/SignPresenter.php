@@ -19,7 +19,7 @@ use Nette\Application\UI\Form;
 use Nette\Security\AuthenticationException;
 use Nette\Utils\Strings;
 
-class SignPresenter extends BasePresenter
+class SignPresenter extends FrontPresenter
 {
     /** @var LoginFormFactory @inject */
     public $loginFormFactory;

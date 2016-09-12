@@ -20,21 +20,16 @@
 				<h3>Hlavička</h3>
 
 				<a n:href="Homepage:">Homepage</a>
-				<a href="#">Obchodní podmínky</a>
-				<a href="#">O nás</a>
-				<a href="#">Kontakt</a>
+				<a n:href="Content:terms">Obchodní podmínky</a>
+				<a n:href="Content:about">O nás</a>
+				<a n:href="Content:contact">Kontakt</a>
 
 			</div>
 			<div class="col-md-3">
 
 				<h3>Košík</h3>
 
-				<b>{$cartInfo['items']|number}</b> položek<br>
-				<b>{$cartInfo['price']|number:2:'.',' '}</b> Kč<br>
-
-				<a href="#">Zobrazit</a>
-
-				{*control cartInfo*}
+				{control cartInfo}
 
 			</div>
 			<div class="col-md-3">

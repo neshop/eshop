@@ -53,6 +53,7 @@ services:
     - App\Components\ProductFormFactory
     - App\Components\BuyFormFactory
     - App\Components\CategoryTreeFactory
+    - App\Components\CartInfoFactory
 
     - App\Model\LostPasswordResetMessageSender
     - App\Model\MessageSenderSettings('simple-shop', 'info@hc4l.cz', '')
