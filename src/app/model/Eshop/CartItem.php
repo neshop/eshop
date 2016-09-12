@@ -52,6 +52,14 @@ class CartItem implements \JsonSerializable
         return $this->quantity * $this->product->getPrice();
     }
 
+    /**
+     * @return Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
     function jsonSerialize()
     {
         return [

@@ -1,0 +1,48 @@
+{block content}
+
+<h1>Košík</h1>
+
+{if $cartItems}
+
+    {var $totalPrice = 0}
+
+    {foreach $cartItems as $item}
+
+        {var $totalPrice += $item['price']}
+
+        {if $iterator->first}
+            <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Položka</th>
+                <th>Cena za kus</th>
+                <th>Kusů</th>
+                <th>Cena celkem</th>
+            </tr>
+        {/if}
+
+        <tr>
+            <td>{$iterator->counter}.</td>
+            <td>{$item['product_name']}</td>
+            <td>{$item['product_price']|number}</td>
+            <td>{$item['quantity']|number}</td>
+            <td>{$item['price']|number}</td>
+        </tr>
+
+        {if $iterator->last}
+            <tr>
+                <td colspan="4">Celkem</td>
+                <td>{$totalPrice|number}</td>
+            </tr>
+            </table>
+        {/if}
+
+    {/foreach}
+
+    <a n:href="clear!" class="btn btn-danger">Smazat košík</a>
+
+{else}
+
+    <p>Košík je prázdný. Vyberte si zboží v <a n:href="Homepage:">katalogu</a>.</p>
+
+{/if}

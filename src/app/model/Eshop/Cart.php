@@ -55,6 +55,12 @@ class Cart
         $this->save();
     }
 
+    public function clear()
+    {
+        $this->items = [];
+        $this->save();
+    }
+
     public function getInfo()
     {
         $price = 0;
@@ -71,6 +77,24 @@ class Cart
             'price' => $price,
             'items' => $items,
         ];
+    }
+
+    public function render()
+    {
+        $output = [];
+
+        /** @var CartItem $item */
+        foreach ($this->items as $item)
+        {
+            $output[] = [
+                'product_name' => $item->getProduct()->getName(),
+                'product_price' => $item->getProduct()->getPrice(),
+                'quantity' => $item->getQuantity(),
+                'price' => $item->getTotalPrice(),
+            ];
+        }
+
+        return $output;
     }
 
     private function save()
