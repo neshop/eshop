@@ -55,6 +55,11 @@ class Cart
         $this->save();
     }
 
+    public function isEmpty()
+    {
+        return empty($this->items);
+    }
+
     public function clear()
     {
         $this->items = [];
