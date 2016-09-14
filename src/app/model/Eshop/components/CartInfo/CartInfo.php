@@ -2,18 +2,18 @@
 
 namespace App\Components;
 
-use App\Model\Eshop\Cart;
+use App\Model\Eshop\Cart AS CartEntity;
 
 class CartInfo extends BaseControl
 {
-    /** @var Cart */
+    /** @var CartEntity */
     private $cart;
 
     /**
      * CartInfo constructor.
-     * @param Cart $cart
+     * @param CartEntity $cart
      */
-    public function __construct(Cart $cart)
+    public function __construct(CartEntity $cart)
     {
         parent::__construct();
 

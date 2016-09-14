@@ -6,11 +6,15 @@
 
 namespace App\Model\Products;
 
+use App\Model\Categories\Category;
 use App\Model\Eshop\Currency;
 use App\Model\ORM\Attributes\SEO;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\UniversallyUniqueIdentifier;
 use Nette\SmartObject;
+use Nette\Utils\ArrayHash;
+use Tracy\Debugger;
 
 /**
  * Class Product
@@ -62,6 +66,12 @@ class Product
     private $currency;
 
     /**
+     * @var Category[]|ArrayCollection
+     * @ORM\ManyToMany(targetEntity="App\Model\Categories\Category",mappedBy="products",indexBy="id")
+     */
+    private $categories;
+
+    /**
      * Product constructor.
      * @param string $name
      * @param string $description
@@ -78,6 +88,8 @@ class Product
         $this->ingredients = $ingredients;
         $this->price = $price;
         $this->currency = $currency;
+
+        $this->categories = new ArrayCollection();
     }
 
     /**
@@ -129,6 +141,32 @@ class Product
         return $this->currency;
     }
 
+    /**
+     * @param Category[] $categories
+     */
+    public function categorize($categories)
+    {
+        $categoriesToRemove = $this->categories->getKeys();
+
+        /** @var Category $category */
+        foreach ($categories as $category)
+        {
+            unset($categoriesToRemove[$category->getId()]);
+
+            if (!$this->categories->contains($category))
+            {
+                $category->addProduct($this);
+                $this->categories->add($category);
+            }
+        }
+
+        foreach ($categoriesToRemove as $categoryId)
+        {
+            $category = $this->categories->get($categoryId);
+            $category->removeProduct($this);
+            $this->categories->remove($categoryId);
+        }
+    }
 
     public function toForm()
     {
@@ -138,7 +176,10 @@ class Product
             'active' => $this->active,
             'ingredients' => $this->ingredients,
             'price' => $this->price,
+            'categories' => $this->categories->getKeys(),
         ];
+
+        Debugger::barDump($this->categories->getKeys());
 
         $data = array_merge($data, $this->seoToForm());
 

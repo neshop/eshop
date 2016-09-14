@@ -7,6 +7,8 @@
 namespace App\Model\Categories;
 
 use App\Model\ORM\Attributes\SEO;
+use App\Model\Products\Product;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 use Gedmo\Mapping\Annotation AS Gedmo;
 use Kdyby\Doctrine\Entities\Attributes\UniversallyUniqueIdentifier;
@@ -70,6 +72,12 @@ class Category extends Object
     private $title;
 
     /**
+     * @var Product[]|ArrayCollection
+     * @ORM\ManyToMany(targetEntity="App\Model\Products\Product",inversedBy="categories")
+     */
+    private $products;
+
+    /**
      * Category constructor.
      * @param string $title
      * @param Category $parent
@@ -81,12 +89,36 @@ class Category extends Object
         {
             $this->parent = $parent;
         }
+
+        $this->products = new ArrayCollection();
+    }
+
+    public function addProduct(Product $product)
+    {
+        if (!$this->products->contains($product))
+        {
+            $this->products->add($product);
+        }
+    }
+
+    public function removeProduct(Product $product)
+    {
+        if ($this->products->contains($product))
+        {
+            $this->products->removeElement($product);
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     public function render()
     {
-
-
         return ArrayHash::from([
             'title' => $this->title,
             'seo_title' => $this->seoTitle,

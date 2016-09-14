@@ -6,9 +6,12 @@
 
 namespace App\Components;
 
+use App\Model\Categories\Category;
 use App\Model\Eshop\Currency;
 use App\Model\Products\Product;
 use Doctrine\ORM\EntityManager;
+use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
+use Tracy\Debugger;
 
 class ProductForm extends BaseControl
 {
@@ -23,6 +26,12 @@ class ProductForm extends BaseControl
 
     public $onSuccess = [];
 
+    /** @var NestedTreeRepository */
+    private $categoryRepository;
+
+    /** @var array|Category[] */
+    private $categories = [];
+
     /**
      * ProductForm constructor.
      * @param BaseFormFactory $baseFormFactory
@@ -36,12 +45,22 @@ class ProductForm extends BaseControl
         $this->baseFormFactory = $baseFormFactory;
         $this->entityManager = $entityManager;
         $this->product = $product;
+        $this->categoryRepository = $entityManager->getRepository(Category::class);
     }
 
 
     public function createComponentForm()
     {
         $form = $this->baseFormFactory->create();
+
+        $categories = [];
+
+        /** @var Category $category */
+        foreach ($this->categoryRepository->findAll() as $category)
+        {
+            $this->categories[$category->getId()] = $category;
+            $categories[$category->getId()] = $category->getTitle();
+        }
 
         $form->addText('name', 'Název')
             ->setRequired(true);
@@ -59,6 +78,8 @@ class ProductForm extends BaseControl
         $form->addCheckbox('active', 'Aktivní');
 
         $form->addText('price', 'Cena Kč');
+
+        $form->addMultiSelect('categories', 'Kategorie', $categories);
 
         $form->addSubmit('submit', 'Uložit');
 
@@ -97,6 +118,14 @@ class ProductForm extends BaseControl
             $this->entityManager->persist($product);
         }
 
+        $categories = [];
+
+        foreach ($values->categories as $categoryId)
+        {
+            $categories[] = $this->categories[$categoryId];
+        }
+
+        $product->categorize($categories);
         $product->setSEO($values->seoTitle, $values->seoKeywords, $values->seoDescription);
 
         $this->entityManager->flush();
