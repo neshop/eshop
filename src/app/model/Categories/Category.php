@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping AS ORM;
 use Gedmo\Mapping\Annotation AS Gedmo;
 use Kdyby\Doctrine\Entities\Attributes\UniversallyUniqueIdentifier;
 use Nette\Object;
+use Nette\Utils\ArrayHash;
 
 /**
  * Class Category
@@ -80,6 +81,18 @@ class Category extends Object
         {
             $this->parent = $parent;
         }
+    }
+
+    public function render()
+    {
+
+
+        return ArrayHash::from([
+            'title' => $this->title,
+            'seo_title' => $this->seoTitle,
+            'seo_description' => $this->seoDescription,
+            'seo_keywords' => $this->seoKeywords,
+        ]);
     }
 
 
