@@ -179,10 +179,18 @@ class Product
             'categories' => $this->categories->getKeys(),
         ];
 
-        Debugger::barDump($this->categories->getKeys());
-
         $data = array_merge($data, $this->seoToForm());
 
         return $data;
+    }
+
+    public function renderListing()
+    {
+        return ArrayHash::from([
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'price' => $this->price,
+        ]);
     }
 }

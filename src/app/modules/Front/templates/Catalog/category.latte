@@ -8,5 +8,18 @@
 
         <h1>Kategorie {$category->title}</h1>
 
+        {foreach $products as $product}
+
+            <div class="">
+                <h2>{$product->name}</h2>
+                <p>{$product->description}</p>
+                <em>{$product->price}</em>
+
+                <a class="btn btn-default" href="{plink Product:detail id => $product->id}">Detail</a>
+
+            </div>
+
+        {/foreach}
+
     </div>
 </div>
