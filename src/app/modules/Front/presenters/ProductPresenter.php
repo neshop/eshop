@@ -2,6 +2,7 @@
 
 namespace App\FrontModule\Presenters;
 
+use App\Components\CategoryTreeTrait;
 use App\Model\Eshop\Cart;
 use App\Model\Products\Product;
 use Doctrine\ORM\EntityManager;
@@ -9,6 +10,8 @@ use Nette\Application\UI\Form;
 
 class ProductPresenter extends FrontPresenter
 {
+    use CategoryTreeTrait;
+
     /** @var EntityManager @inject */
     public $entityManager;
 
