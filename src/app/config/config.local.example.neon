@@ -1,3 +1,9 @@
+parameters:
+    analytics:
+        googleAnalytics:
+            site:
+            key:
+
 doctrine:
     user:
     password:

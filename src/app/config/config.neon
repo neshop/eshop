@@ -1,9 +1,6 @@
 # WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
 # https://nette.org/security-warning
 
-parameters:
-
-
 php:
     date.timezone: Europe/Prague
 
@@ -44,6 +41,12 @@ services:
     - App\Model\Eshop\Cart
 
     - Nextras\Forms\Rendering\Bs3FormRenderer
+
+    - Analytics\Components\GoogleAnalytics(
+            %debugMode%,
+            %analytics.googleAnalytics.site%,
+            %analytics.googleAnalytics.key%
+        )
 
     - App\Components\BaseForm
     - App\Components\RegistrationFormFactory

@@ -7,7 +7,6 @@ use Kdyby\Doctrine\EntityManager;
 use Kdyby\Doctrine\EntityRepository;
 use Nette\SmartObject;
 use Nette\Utils\Json;
-use Tracy\Debugger;
 
 class Cart
 {
@@ -36,19 +35,15 @@ class Cart
 
     public function add(Product $product, $quantity)
     {
-        if (array_key_exists($product->getId(), $this->items))
-        {
+        if (array_key_exists($product->getId(), $this->items)) {
             $item = $this->items[$product->getId()];
             $item->changeQuantity($item->getQuantity() + $quantity);
-        }
-        else
-        {
+        } else {
             $item = new CartItem($product, $quantity);
             $this->items[$product->getId()] = $item;
         }
 
-        if ($item->getQuantity() <= 0)
-        {
+        if ($item->getQuantity() <= 0) {
             unset($this->items[$product->getId()]);
         }
 
@@ -72,8 +67,7 @@ class Cart
         $items = 0;
 
         /** @var CartItem $item */
-        foreach ($this->items as $item)
-        {
+        foreach ($this->items as $item) {
             $price += $item->getTotalPrice();
             $items += $item->getQuantity();
         }
@@ -89,8 +83,7 @@ class Cart
         $output = [];
 
         /** @var CartItem $item */
-        foreach ($this->items as $item)
-        {
+        foreach ($this->items as $item) {
             $output[] = [
                 'product_name' => $item->getProduct()->getName(),
                 'product_price' => $item->getProduct()->getPrice(),
@@ -115,14 +108,11 @@ class Cart
 
         $data = $this->storage->load();
 
-        if ($data)
-        {
+        if ($data) {
             $items = Json::decode($data);
 
-            if ($items)
-            {
-                foreach ($items as $item)
-                {
+            if ($items) {
+                foreach ($items as $item) {
                     // TODO zoptimalizovat
                     /** @var Product $product */
                     $product = $productRepository->find($item->id_product);
