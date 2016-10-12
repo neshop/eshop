@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * (c) 2016 - Josef Drabek <rydercz@gmail.com>
- */
 
 namespace App\Model\Fixtures\DefaultData;
 
@@ -24,8 +20,7 @@ class UsersFixtures extends AbstractFixture implements OrderedFixtureInterface
             'ryder@hc4l.cz' => '123456'
         ];
 
-        foreach($users as $email => $password)
-        {
+        foreach($users as $email => $password) {
             $user = new User($email, $password);
             $manager->persist($user);
         }

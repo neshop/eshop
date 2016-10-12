@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * (c) 2016 - Josef Drabek <rydercz@gmail.com>
- */
 
 namespace App\Model\Categories;
 
@@ -85,8 +81,7 @@ class Category extends Object
     public function __construct($title, $parent = null)
     {
         $this->title = $title;
-        if ($parent instanceof Category)
-        {
+        if ($parent instanceof Category) {
             $this->parent = $parent;
         }
 
@@ -95,16 +90,14 @@ class Category extends Object
 
     public function addProduct(Product $product)
     {
-        if (!$this->products->contains($product))
-        {
+        if (!$this->products->contains($product)) {
             $this->products->add($product);
         }
     }
 
     public function removeProduct(Product $product)
     {
-        if ($this->products->contains($product))
-        {
+        if ($this->products->contains($product)) {
             $this->products->removeElement($product);
         }
     }
@@ -126,6 +119,4 @@ class Category extends Object
             'seo_keywords' => $this->seoKeywords,
         ]);
     }
-
-
 }

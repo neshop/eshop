@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * (c) 2015 - Josef Drabek <rydercz@gmail.com>
- */
 
 namespace App\Components;
 
@@ -38,5 +34,4 @@ class BaseForm extends BaseControl implements BaseFormFactory
 
         return $form;
     }
-
 }

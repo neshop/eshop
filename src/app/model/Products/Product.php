@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * (c) 2016 - Josef Drabek <rydercz@gmail.com>
- */
 
 namespace App\Model\Products;
 
@@ -14,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\UniversallyUniqueIdentifier;
 use Nette\SmartObject;
 use Nette\Utils\ArrayHash;
-use Tracy\Debugger;
 
 /**
  * Class Product
@@ -149,19 +144,16 @@ class Product
         $categoriesToRemove = $this->categories->getKeys();
 
         /** @var Category $category */
-        foreach ($categories as $category)
-        {
+        foreach ($categories as $category) {
             unset($categoriesToRemove[$category->getId()]);
 
-            if (!$this->categories->contains($category))
-            {
+            if (!$this->categories->contains($category)) {
                 $category->addProduct($this);
                 $this->categories->add($category);
             }
         }
 
-        foreach ($categoriesToRemove as $categoryId)
-        {
+        foreach ($categoriesToRemove as $categoryId) {
             $category = $this->categories->get($categoryId);
             $category->removeProduct($this);
             $this->categories->remove($categoryId);

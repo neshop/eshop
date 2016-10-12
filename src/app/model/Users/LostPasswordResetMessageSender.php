@@ -30,8 +30,7 @@ class LostPasswordResetMessageSender extends Nette\Object
         Nette\Application\LinkGenerator $linkGenerator,
         MessageSenderSettings $messageSenderSettings,
         Nette\Mail\IMailer $mailer
-    )
-    {
+    ) {
         $this->messageSenderSettings = $messageSenderSettings;
         $this->templateFactory = $templateFactory;
         $this->linkGenerator = $linkGenerator;

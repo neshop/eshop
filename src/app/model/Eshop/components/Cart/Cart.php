@@ -22,12 +22,9 @@ class Cart extends BaseControl
     {
         $template = $this->getTemplate();
 
-        if ($this->cart->isEmpty())
-        {
+        if ($this->cart->isEmpty()) {
             $template->setFile(__DIR__ . '/empty.latte');
-        }
-        else
-        {
+        } else {
             $template->setFile(__DIR__ . '/Cart.latte');
             $template->cartItems = $this->cart->render();
         }

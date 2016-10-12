@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * (c) 2016 - Josef Drabek <rydercz@gmail.com>
- */
 
 namespace App\Model\Users;
 
@@ -28,13 +24,11 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
         list ($email, $password) = $credentials;
 
         $user = $this->userRepository->findByEmail($email);
-        if (!$user)
-        {
+        if (!$user) {
             throw new AuthenticationException('Uživatel nebyl nalezen', self::IDENTITY_NOT_FOUND);
         }
 
-        if (!$user->verifyPassword($password))
-        {
+        if (!$user->verifyPassword($password)) {
             throw new AuthenticationException('Špatné heslo', self::INVALID_CREDENTIAL);
         }
 

@@ -7,7 +7,6 @@ use Kdyby\Doctrine\EntityManager;
 use Nette;
 use Nette\Application\UI\Form;
 
-
 class ChangePasswordForm extends Nette\Application\UI\Control
 {
     /** @var BaseFormFactory */

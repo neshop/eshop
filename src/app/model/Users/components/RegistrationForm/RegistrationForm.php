@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * (c) 2015 - Josef Drabek <rydercz@gmail.com>
- */
 
 namespace App\Components;
 
@@ -38,8 +34,7 @@ class RegistrationForm extends Control
         BaseFormFactory $baseFormFactory,
         EntityManager $entityManager,
         UserRepository $userRepository
-    )
-    {
+    ) {
         parent::__construct();
 
         $this->baseFormFactory = $baseFormFactory;
@@ -75,7 +70,6 @@ class RegistrationForm extends Control
     public function processForm($form, $values)
     {
         try {
-
             $email = Strings::normalize($values['email']);
 
             $user = new User($email, $values['password']);
@@ -84,9 +78,7 @@ class RegistrationForm extends Control
             $this->entityManager->flush();
 
             $this->onRegistrationSuccess($form);
-
         } catch (UniqueConstraintViolationException $e) {
-
             $this->onRegistrationErrorUserExists($form);
         }
     }
@@ -97,5 +89,4 @@ class RegistrationForm extends Control
         $template->setFile(__DIR__ . '/RegistrationForm.latte');
         $template->render();
     }
-
 }

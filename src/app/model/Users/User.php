@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * (c) 2016 - Josef Drabek <rydercz@gmail.com>
- */
 
 namespace App\Model\Users;
 
@@ -61,7 +57,9 @@ class User extends Nette\Object implements Nette\Security\IIdentity
     protected function setEmail($email)
     {
         $email = Nette\Utils\Strings::normalize($email);
-        if (!Nette\Utils\Validators::isEmail($email)) throw new \InvalidArgumentException;
+        if (!Nette\Utils\Validators::isEmail($email)) {
+            throw new \InvalidArgumentException;
+        }
         $this->email = $email;
     }
 
@@ -121,14 +119,14 @@ class User extends Nette\Object implements Nette\Security\IIdentity
      */
     public function hasValidLostPasswordToken()
     {
-        return (!is_null($this->lostPasswordResetTokenLifeTime) && $this->lostPasswordResetTokenLifeTime > new DateTime());
+        return (
+            !is_null($this->lostPasswordResetTokenLifeTime)
+            && $this->lostPasswordResetTokenLifeTime > new DateTime()
+        );
     }
 
-    function getRoles()
+    public function getRoles()
     {
         return [];
     }
-
-
 }
-

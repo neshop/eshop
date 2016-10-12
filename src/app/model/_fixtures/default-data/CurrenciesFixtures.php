@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * (c) 2016 - Josef Drabek <rydercz@gmail.com>
- */
 
 namespace App\Model\Fixtures\DefaultData;
 
@@ -36,6 +32,4 @@ class CurrenciesFixtures extends AbstractFixture implements OrderedFixtureInterf
     {
         return 100;
     }
-
-
 }

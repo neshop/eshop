@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * (c) 2015 - Josef Drabek <rydercz@gmail.com>
- */
 
 namespace App\Components;
 
@@ -35,8 +31,7 @@ class LostPasswordForm extends Control
         UserRepository $userRepository,
         LostPasswordResetMessageSender $lostPasswordResetMessageSender,
         EntityManager $entityManager
-    )
-    {
+    ) {
         parent::__construct();
         $this->baseFormFactory = $baseFormFactory;
         $this->userRepository = $userRepository;
@@ -78,5 +73,4 @@ class LostPasswordForm extends Control
         $template->setFile(__DIR__ . '/LostPasswordForm.latte');
         $template->render();
     }
-
 }

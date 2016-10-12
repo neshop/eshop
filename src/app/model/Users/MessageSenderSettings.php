@@ -51,5 +51,4 @@ class MessageSenderSettings extends Nette\Object
     {
         return $this->templateDir;
     }
-
 }

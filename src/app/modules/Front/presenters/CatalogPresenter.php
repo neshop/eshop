@@ -31,8 +31,7 @@ class CatalogPresenter extends FrontPresenter
 
         $category = $repository->find($id);
 
-        if (!$category)
-        {
+        if (!$category) {
             // todo not found
         }
 
@@ -59,8 +58,7 @@ class CatalogPresenter extends FrontPresenter
         $products = [];
 
         /** @var Product $product */
-        foreach ($this->products as $product)
-        {
+        foreach ($this->products as $product) {
             $products[] = $product->renderListing();
         }
 

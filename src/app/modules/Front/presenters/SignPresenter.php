@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * (c) 2015 - Josef Drabek <rydercz@gmail.com>
- */
 
 namespace App\FrontModule\Presenters;
 
@@ -48,12 +44,12 @@ class SignPresenter extends FrontPresenter
     protected function createComponentLoginForm()
     {
         $control = $this->loginFormFactory->create();
-        $control->onLoginSuccess[] = function(Form $form) {
+        $control->onLoginSuccess[] = function (Form $form) {
             $this->flashMessage('Přihlášení bylo úspěšné!', 'success');
             $this->restoreRequest($this->backlink);
             $this->redirect('Homepage:');
         };
-        $control->onLoginError[] = function(Form $form, AuthenticationException $e) {
+        $control->onLoginError[] = function (Form $form, AuthenticationException $e) {
             $this->flashMessage($e->getMessage(), 'danger');
         };
         return $control;
@@ -62,14 +58,14 @@ class SignPresenter extends FrontPresenter
     protected function createComponentRegistrationForm()
     {
         $control = $this->registrationFormFactory->create();
-        $control->onRegistrationSuccess[] = function(Form $form) {
+        $control->onRegistrationSuccess[] = function (Form $form) {
             $this->flashMessage('Registrace byla úspěšná!', 'success');
             $this->redirect('Homepage:');
         };
-        $control->onRegistrationError = function(Form $form) {
+        $control->onRegistrationError = function (Form $form) {
             $this->flashMessage('Při registraci došlo k chybě. Zkuste to prosím později', 'danger');
         };
-        $control->onRegistrationErrorUserExists = function(Form $form) {
+        $control->onRegistrationErrorUserExists = function (Form $form) {
             $this->flashMessage('Tento e-mail je již zaregistrován. Zvolte prosím jiný nebo se přihlašte', 'danger');
         };
         return $control;
@@ -78,26 +74,35 @@ class SignPresenter extends FrontPresenter
     protected function createComponentLostPasswordForm()
     {
         $control = $this->lostPasswordFormFactory->create();
-        $control->onLostPasswordFormError = function($message) {
-            if (!Strings::length($message)) $message = 'Došlo k neznámé chybě. Zkuste to prosím později';
+        $control->onLostPasswordFormError = function ($message) {
+            if (!Strings::length($message)) {
+                $message = 'Došlo k neznámé chybě. Zkuste to prosím později';
+            }
             $this->flashMessage($message, 'danger');
         };
-        $control->onLostPasswordFormSuccess = function() {
-            $this->flashMessage('Další informace vám byly odeslány na zadaný e-mail. Zkontrolujte prosím svůj e-mail.', 'success');
+        $control->onLostPasswordFormSuccess = function () {
+            $message = 'Další informace vám byly odeslány na zadaný e-mail. Zkontrolujte prosím svůj e-mail.';
+            $this->flashMessage($message, 'success');
             $this->redirect('this');
         };
         return $control;
     }
 
-    public function actionResetPassword($id)
+    public function actionResetPassword($token)
     {
         try {
+            if (!$token) {
+                throw new BadTokenException;
+            }
 
-            if (!$id) throw new BadTokenException;
+            $user = $this->userRepository->findByLostPasswordResetToken($token);
+            if (!$user) {
+                throw new BadTokenException;
+            }
 
-            $user = $this->userRepository->findByLostPasswordResetToken($id);
-            if (!$user) throw new BadTokenException;
-            if (!$user->hasValidLostPasswordToken()) throw new BadTokenException;
+            if (!$user->hasValidLostPasswordToken()) {
+                throw new BadTokenException;
+            }
 
             $this->user = $user;
 
@@ -110,13 +115,12 @@ class SignPresenter extends FrontPresenter
     protected function createComponentPasswordResetForm()
     {
         $control = $this->changePasswordFormFactory->create($this->user);
-        $control->onSuccess = function() {
+        $control->onSuccess = function () {
             $this->flashMessage('Vaše heslo bylo úspěšně změněno. Nyní se můžete přihlásit', 'success');
             $this->redirect('Sign:in');
         };
         return $control;
     }
-
 
     public function actionOut()
     {

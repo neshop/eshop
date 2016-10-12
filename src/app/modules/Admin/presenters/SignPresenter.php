@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * (c) 2016 - Josef Drabek <rydercz@gmail.com>
- */
 
 namespace App\AdminModule\Presenters;
 
@@ -22,12 +18,12 @@ class SignPresenter extends BasePresenter
     protected function createComponentLoginForm()
     {
         $control = $this->loginFormFactory->create();
-        $control->onLoginSuccess[] = function(Form $form) {
+        $control->onLoginSuccess[] = function (Form $form) {
             $this->flashMessage('Přihlášení bylo úspěšné!', 'success');
             $this->restoreRequest($this->backlink);
             $this->redirect('Dashboard:');
         };
-        $control->onLoginError[] = function(Form $form, AuthenticationException $e) {
+        $control->onLoginError[] = function (Form $form, AuthenticationException $e) {
             $this->flashMessage($e->getMessage(), 'danger');
         };
         return $control;

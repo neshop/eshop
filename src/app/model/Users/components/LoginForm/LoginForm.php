@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * (c) 2015 - Josef Drabek <rydercz@gmail.com>
- */
 
 namespace App\Components;
 
@@ -50,12 +46,9 @@ class LoginForm extends Control
     public function processForm($form, $values)
     {
         try {
-
             $this->user->login($values['email'], $values['password']);
             $this->onLoginSuccess($form);
-
         } catch (AuthenticationException $e) {
-
             $this->onLoginError($form, $e);
         }
     }
@@ -66,5 +59,4 @@ class LoginForm extends Control
         $template->setFile(__DIR__ . '/LoginForm.latte');
         $template->render();
     }
-
 }

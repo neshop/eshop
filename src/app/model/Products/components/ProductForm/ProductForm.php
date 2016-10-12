@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * (c) 2016 - Josef Drabek <rydercz@gmail.com>
- */
 
 namespace App\Components;
 
@@ -11,7 +7,6 @@ use App\Model\Eshop\Currency;
 use App\Model\Products\Product;
 use Doctrine\ORM\EntityManager;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
-use Tracy\Debugger;
 
 class ProductForm extends BaseControl
 {
@@ -56,8 +51,7 @@ class ProductForm extends BaseControl
         $categories = [];
 
         /** @var Category $category */
-        foreach ($this->categoryRepository->findAll() as $category)
-        {
+        foreach ($this->categoryRepository->findAll() as $category) {
             $this->categories[$category->getId()] = $category;
             $categories[$category->getId()] = $category->getTitle();
         }
@@ -85,8 +79,7 @@ class ProductForm extends BaseControl
 
         $form->onSuccess[] = [$this, 'processForm'];
 
-        if ($this->product)
-        {
+        if ($this->product) {
             $form->setDefaults($this->product->toForm());
         }
 
@@ -98,15 +91,12 @@ class ProductForm extends BaseControl
         /** @var Currency $currency */
         $currency = $this->entityManager->find(Currency::class, 'CZK');
 
-        if ($this->product)
-        {
+        if ($this->product) {
             $product = $this->product;
             $product->changeTexts($values->name, $values->description, $values->ingredients);
             $product->changeState($values->active);
             $product->changePrice($values->price, $currency);
-        }
-        else
-        {
+        } else {
             $product = new Product(
                 $values->name,
                 $values->description,
@@ -120,8 +110,7 @@ class ProductForm extends BaseControl
 
         $categories = [];
 
-        foreach ($values->categories as $categoryId)
-        {
+        foreach ($values->categories as $categoryId) {
             $categories[] = $this->categories[$categoryId];
         }
 

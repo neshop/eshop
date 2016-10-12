@@ -28,8 +28,7 @@ class CartItem implements \JsonSerializable
      */
     public function changeQuantity($newQuantity)
     {
-        if ($newQuantity <= 0)
-        {
+        if ($newQuantity <= 0) {
             throw new \InvalidArgumentException;
         }
 
@@ -60,13 +59,11 @@ class CartItem implements \JsonSerializable
         return $this->product;
     }
 
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return [
             'id_product' => $this->product->getId(),
             'quantity' => $this->quantity,
         ];
     }
-
-
 }

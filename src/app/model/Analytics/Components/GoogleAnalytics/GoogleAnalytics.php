@@ -3,12 +3,11 @@
 namespace Analytics\Components;
 
 use App\Components\BaseControl;
-use Tracy\Debugger;
 
 class GoogleAnalytics extends BaseControl
 {
     /** @var boolean */
-    private $isEnabled;
+    private $isDebugMode;
 
     /** @var string */
     private $site;
@@ -19,15 +18,15 @@ class GoogleAnalytics extends BaseControl
     public function __construct($isDebugMode, $site, $key)
     {
         parent::__construct();
-        $this->isEnabled = !$isDebugMode;
+
+        $this->isDebugMode = $isDebugMode;
         $this->site = $site;
         $this->key = $key;
     }
 
     public function render()
     {
-        var_dump($this->isEnabled);
-        if (!$this->isEnabled) {
+        if ($this->isDebugMode) {
             return;
         }
 

@@ -2,7 +2,7 @@
 
 namespace App\Components;
 
-use App\Model\Eshop\Cart AS CartEntity;
+use App\Model\Eshop\Cart as CartEntity;
 
 class CartInfo extends BaseControl
 {
