@@ -31,37 +31,5 @@ doctrine:
     filters:
         soft-deleteable: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
 
-services:
-    router: App\RouterFactory::createRouter
-
-    - App\Model\Users\Authenticator
-    - App\Model\Users\UserRepository
-
-    - App\Model\Eshop\CartSessionStorage
-    - App\Model\Eshop\Cart
-
-    - Nextras\Forms\Rendering\Bs3FormRenderer
-
-    - Analytics\Components\GoogleAnalytics(
-            %debugMode%,
-            %analytics.googleAnalytics.site%,
-            %analytics.googleAnalytics.key%
-        )
-
-    - App\Components\BaseForm
-    - App\Components\RegistrationFormFactory
-    - App\Components\LoginFormFactory
-    - App\Components\ChangePasswordFormFactory
-    - App\Components\LostPasswordFormFactory
-    - App\Components\ProductFormFactory
-    - App\Components\BuyFormFactory
-    - App\Components\CategoryTreeFactory
-    - App\Components\CartInfoFactory
-    - App\Components\CartFactory
-
-    - App\Model\LostPasswordResetMessageSender
-    - App\Model\MessageSenderSettings('simple-shop', 'info@hc4l.cz', '')
-
-    -
-        class: App\Model\Fixtures\DefaultData
-        tags: [kdyby.console.command]
+includes:
+    - services.neon
