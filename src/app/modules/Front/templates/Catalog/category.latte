@@ -1,25 +1,21 @@
+{block side}
+    {control categoryTree}
+{/block}
+
+
 {block content}
 
-<div class="row">
-    <div class="col-md-3">
-        {control categoryTree}
-    </div>
-    <div class="col-md-9">
+<h1>Kategorie {$category->title}</h1>
 
-        <h1>Kategorie {$category->title}</h1>
+{foreach $products as $product}
 
-        {foreach $products as $product}
+    <div class="">
+        <h2>{$product->name}</h2>
+        <p>{$product->description}</p>
+        <em>{$product->price}</em>
 
-            <div class="">
-                <h2>{$product->name}</h2>
-                <p>{$product->description}</p>
-                <em>{$product->price}</em>
-
-                <a class="btn btn-default" href="{plink Product:detail id => $product->id}">Detail</a>
-
-            </div>
-
-        {/foreach}
+        <a class="btn btn-default" href="{plink Product:detail id => $product->id}">Detail</a>
 
     </div>
-</div>
+
+{/foreach}

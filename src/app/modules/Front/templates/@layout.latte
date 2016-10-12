@@ -49,12 +49,27 @@
 
 		<div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">{$flash->message}</div>
 
-		{include content}
+		{ifset #side}
+			<div class="row">
+				<div class="col-md-3">
+					{include side}
+				</div>
+				<div class="col-md-9">
+					{include content}
+				</div>
+			</div>
+		{else}
+			<div class="row">
+				<div class="col-md-12">
+					{include content}
+				</div>
+			</div>
+		{/ifset}
 
 	</div>
 
 	{block scripts}
-		<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+		<script src="{$basePath}/bower_components/nette-forms/src/assets/netteForms.js"></script>
 	{/block}
 </body>
 </html>
