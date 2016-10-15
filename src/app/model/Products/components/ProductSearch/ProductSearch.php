@@ -6,6 +6,7 @@ use App\Components\BaseControl;
 use App\Components\BaseFormFactory;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Utils\Strings;
+use Tomaj\Form\Renderer\BootstrapInlineRenderer;
 use Tracy\Debugger;
 
 class ProductSearch extends BaseControl
@@ -36,6 +37,7 @@ class ProductSearch extends BaseControl
     public function createComponentSearchForm()
     {
         $form = $this->baseFormFactory->create();
+        $form->setRenderer(new BootstrapInlineRenderer());
         $form->setAction($this->presenter->link('Product:search'));
         $form->addText('search', 'Hledat')
             ->setRequired(true);

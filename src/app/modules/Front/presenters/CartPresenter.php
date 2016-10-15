@@ -2,16 +2,15 @@
 
 namespace App\FrontModule\Presenters;
 
-use App\Components\CartFactory;
+use App\Components\OrderForm;
 
 class CartPresenter extends FrontPresenter
 {
-    /** @var CartFactory @inject */
-    public $cartFactory;
+    /** @var OrderForm @inject */
+    public $orderForm;
 
     public function createComponentCart()
     {
-        $control = $this->cartFactory->create();
-        return $control;
+        return $this->orderForm;
     }
 }

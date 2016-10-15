@@ -7,7 +7,7 @@ services:
     - App\Model\Eshop\CartSessionStorage
     - App\Model\Eshop\Cart
 
-    - Nextras\Forms\Rendering\Bs3FormRenderer
+    - Tomaj\Form\Renderer\BootstrapVerticalRenderer
 
     - Analytics\Components\GoogleAnalytics(
             %debugMode%,
@@ -15,7 +15,7 @@ services:
             %analytics.googleAnalytics.key%
         )
 
-    - App\Components\BaseForm
+    - App\Components\BaseFormFactory
     - App\Components\RegistrationFormFactory
     - App\Components\LoginFormFactory
     - App\Components\ChangePasswordFormFactory
@@ -25,6 +25,7 @@ services:
     - App\Components\CategoryTreeFactory
     - App\Components\CartInfoFactory
     - App\Components\CartFactory
+    - App\Components\OrderForm
 
     - App\Model\Products\ProductSearchFactory
 

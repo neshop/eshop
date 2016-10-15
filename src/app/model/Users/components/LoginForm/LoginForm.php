@@ -6,6 +6,7 @@ use Nette\Application\UI\Control;
 use Nette\Forms\Form;
 use Nette\Security\AuthenticationException;
 use Nette\Security\User;
+use Tracy\Debugger;
 
 class LoginForm extends Control
 {

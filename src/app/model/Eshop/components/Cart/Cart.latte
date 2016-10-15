@@ -1,8 +1,10 @@
 {var $totalPrice = 0}
 
+{form cartForm}
+
 {foreach $cartItems as $item}
 
-    {var $totalPrice += $item['price']}
+    {var $totalPrice += $item->price}
 
     {if $iterator->first}
         <table class="table">
@@ -17,10 +19,12 @@
 
     <tr>
         <td>{$iterator->counter}.</td>
-        <td>{$item['product_name']}</td>
-        <td>{$item['product_price']|number}</td>
-        <td>{$item['quantity']|number}</td>
-        <td>{$item['price']|number}</td>
+        <td><a href="{plink Product:detail productId => $item->productId}">{$item->productName}</a></td>
+        <td>{$item->productPrice|number}</td>
+        <td>
+            <input class="form-control" title="Počet kusů" type="number" name="item_count[{$item->productId}]" value="{$item->quantity}">
+        </td>
+        <td>{$item->price|number}</td>
     </tr>
 
     {if $iterator->last}
@@ -33,4 +37,8 @@
 
 {/foreach}
 
+{input recount class => 'btn btn-default'}
+
 <a n:href="clear!" class="btn btn-danger">Smazat košík</a>
+
+{/form}

@@ -6,6 +6,7 @@ use App\Model\Products\Product;
 use Kdyby\Doctrine\EntityManager;
 use Kdyby\Doctrine\EntityRepository;
 use Nette\SmartObject;
+use Nette\Utils\ArrayHash;
 use Nette\Utils\Json;
 
 class Cart
@@ -33,18 +34,34 @@ class Cart
         $this->load();
     }
 
+    public function setQuantity($productId, $quantity)
+    {
+        if (array_key_exists($productId, $this->items)) {
+            if ($quantity <= 0) {
+                unset($this->items[$productId]);
+            } else {
+                $item = $this->items[$productId];
+                $item->changeQuantity($quantity);
+            }
+
+            $this->save();
+        }
+    }
+
     public function add(Product $product, $quantity)
     {
-        if (array_key_exists($product->getId(), $this->items)) {
-            $item = $this->items[$product->getId()];
+        $productId = (string) $product->getId();
+
+        if (array_key_exists($productId, $this->items)) {
+            $item = $this->items[$productId];
             $item->changeQuantity($item->getQuantity() + $quantity);
         } else {
             $item = new CartItem($product, $quantity);
-            $this->items[$product->getId()] = $item;
+            $this->items[$productId] = $item;
         }
 
         if ($item->getQuantity() <= 0) {
-            unset($this->items[$product->getId()]);
+            unset($this->items[$productId]);
         }
 
         $this->save();
@@ -84,12 +101,13 @@ class Cart
 
         /** @var CartItem $item */
         foreach ($this->items as $item) {
-            $output[] = [
-                'product_name' => $item->getProduct()->getName(),
-                'product_price' => $item->getProduct()->getPrice(),
+            $output[] = ArrayHash::from([
+                'productId' => (string) $item->getProduct()->getId(),
+                'productName' => $item->getProduct()->getName(),
+                'productPrice' => $item->getProduct()->getPrice(),
                 'quantity' => $item->getQuantity(),
                 'price' => $item->getTotalPrice(),
-            ];
+            ]);
         }
 
         return $output;
@@ -115,9 +133,9 @@ class Cart
                 foreach ($items as $item) {
                     // TODO zoptimalizovat
                     /** @var Product $product */
-                    $product = $productRepository->find($item->id_product);
+                    $product = $productRepository->find($item->productId);
 
-                    $this->items[$item->id_product] = new CartItem($product, $item->quantity);
+                    $this->items[$item->productId] = new CartItem($product, $item->quantity);
                 }
             }
         }

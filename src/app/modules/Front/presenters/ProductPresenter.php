@@ -2,12 +2,14 @@
 
 namespace App\FrontModule\Presenters;
 
+use App\Components\BaseFormFactory;
 use App\Components\CategoryTreeTrait;
 use App\Model\Eshop\Cart;
 use App\Model\Products\Product;
 use Doctrine\ORM\EntityManager;
 use Nette\Application\UI\Form;
 use Nette\Http\IResponse;
+use Tomaj\Form\Renderer\BootstrapInlineRenderer;
 
 class ProductPresenter extends FrontPresenter
 {
@@ -21,6 +23,9 @@ class ProductPresenter extends FrontPresenter
 
     /** @var Product */
     private $product;
+
+    /** @var BaseFormFactory @inject */
+    public $baseFormFactory;
 
     public function actionDetail($productId)
     {
@@ -40,7 +45,8 @@ class ProductPresenter extends FrontPresenter
 
     public function createComponentAddToCartForm()
     {
-        $form = new Form();
+        $form = $this->baseFormFactory->create();
+        $form->setRenderer(new BootstrapInlineRenderer());
         $form->addInteger('quantity', 'Počet')
             ->setType('number')
             ->setDefaultValue(1)
