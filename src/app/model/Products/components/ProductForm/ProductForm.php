@@ -52,8 +52,8 @@ class ProductForm extends BaseControl
 
         /** @var Category $category */
         foreach ($this->categoryRepository->findAll() as $category) {
-            $this->categories[$category->getId()] = $category;
-            $categories[$category->getId()] = $category->getTitle();
+            $this->categories[(string) $category->getId()] = $category;
+            $categories[(string) $category->getId()] = $category->getTitle();
         }
 
         $form->addText('name', 'Název')

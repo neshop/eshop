@@ -3,8 +3,8 @@
 namespace App\Model\Users;
 
 use App\Model\LostPasswordResetMessageSender;
-use Doctrine\ORM\Mapping AS ORM;
-use Kdyby\Doctrine\Entities\Attributes\UniversallyUniqueIdentifier;
+use App\Model\ORM\Attributes\UUID;
+use Doctrine\ORM\Mapping as ORM;
 use Nette;
 use Nette\Utils\DateTime;
 use Nette\Utils\Random;
@@ -17,7 +17,7 @@ use Nette\Utils\Random;
  */
 class User extends Nette\Object implements Nette\Security\IIdentity
 {
-    use UniversallyUniqueIdentifier;
+    use UUID;
 
     /**
      * @var string

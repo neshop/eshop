@@ -27,6 +27,7 @@ gedmo:
 doctrine:
     types:
         bit: Doctrine\DBAL\Types\BooleanType
+        uuid: Ramsey\Uuid\Doctrine\UuidType
 
     filters:
         soft-deleteable: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter

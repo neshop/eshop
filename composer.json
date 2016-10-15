@@ -20,7 +20,8 @@
 		"rixxi/gedmo": "^1.0",
 		"nextras/forms": "^1.6",
 		"ublaboo/datagrid": "^4.4",
-		"doctrine/data-fixtures": "^1.2"
+		"doctrine/data-fixtures": "^1.2",
+		"ramsey/uuid-doctrine": "^1.2"
 	},
 	"require-dev": {
 		"nette/tester": "^1.6"

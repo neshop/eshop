@@ -5,6 +5,7 @@ namespace App\Model\Products;
 use App\Model\Categories\Category;
 use App\Model\Eshop\Currency;
 use App\Model\ORM\Attributes\SEO;
+use App\Model\ORM\Attributes\UUID;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\UniversallyUniqueIdentifier;
@@ -20,7 +21,7 @@ use Nette\Utils\ArrayHash;
 class Product
 {
     use SmartObject;
-    use UniversallyUniqueIdentifier;
+    use UUID;
     use SEO;
 
     /**
@@ -145,7 +146,7 @@ class Product
 
         /** @var Category $category */
         foreach ($categories as $category) {
-            unset($categoriesToRemove[$category->getId()]);
+            unset($categoriesToRemove[(string) $category->getId()]);
 
             if (!$this->categories->contains($category)) {
                 $category->addProduct($this);

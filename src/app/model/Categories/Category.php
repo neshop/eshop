@@ -3,6 +3,7 @@
 namespace App\Model\Categories;
 
 use App\Model\ORM\Attributes\SEO;
+use App\Model\ORM\Attributes\UUID;
 use App\Model\Products\Product;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
@@ -20,7 +21,7 @@ use Nette\Utils\ArrayHash;
  */
 class Category extends Object
 {
-    use UniversallyUniqueIdentifier;
+    use UUID;
     use SEO;
 
     /**
