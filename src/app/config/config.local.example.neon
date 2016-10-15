@@ -1,8 +1,8 @@
 parameters:
     analytics:
         googleAnalytics:
-            site:
-            key:
+            site: auto
+            key: #UA-XXX-YY from Google Analytics Console
 
 doctrine:
     user:
