@@ -17,7 +17,7 @@ class UsersFixtures extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $users = [
-            'ryder@hc4l.cz' => '123456'
+            'admin@example.com' => '123456'
         ];
 
         foreach($users as $email => $password) {
