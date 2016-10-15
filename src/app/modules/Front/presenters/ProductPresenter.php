@@ -7,6 +7,7 @@ use App\Model\Eshop\Cart;
 use App\Model\Products\Product;
 use Doctrine\ORM\EntityManager;
 use Nette\Application\UI\Form;
+use Nette\Http\IResponse;
 
 class ProductPresenter extends FrontPresenter
 {
@@ -21,10 +22,14 @@ class ProductPresenter extends FrontPresenter
     /** @var Product */
     private $product;
 
-    public function actionDetail($id)
+    public function actionDetail($productId)
     {
         $repository = $this->entityManager->getRepository(Product::class);
-        $this->product = $repository->find($id);
+        $this->product = $repository->find($productId);
+
+        if (!$this->product) {
+            $this->error(sprintf('Product "%s" not found', $productId), IResponse::S404_NOT_FOUND);
+        }
     }
 
     public function renderDetail()

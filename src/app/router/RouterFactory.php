@@ -24,6 +24,22 @@ class RouterFactory
             ]
         );
         $router[] = new Route(
+            'kategorie/<categoryId>',
+            [
+                'module' => 'Front',
+                'presenter' => 'Catalog',
+                'action' => 'category',
+            ]
+        );
+        $router[] = new Route(
+            'produkt/<productId>',
+            [
+                'module' => 'Front',
+                'presenter' => 'Product',
+                'action' => 'detail',
+            ]
+        );
+        $router[] = new Route(
             '<presenter>/<action>[/<id>]',
             [
                 'presenter' => 'Homepage',

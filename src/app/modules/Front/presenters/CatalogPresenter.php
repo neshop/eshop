@@ -2,14 +2,12 @@
 
 namespace App\FrontModule\Presenters;
 
-use App\Components\CartInfoTrait;
 use App\Components\CategoryTreeTrait;
-use App\Components\ProductForm;
 use App\Model\Categories\Category;
 use App\Model\Products\Product;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use Kdyby\Doctrine\EntityManager;
-use Tracy\Debugger;
+use Nette\Http\IResponse;
 
 class CatalogPresenter extends FrontPresenter
 {
@@ -24,30 +22,28 @@ class CatalogPresenter extends FrontPresenter
     /** @var Product[] */
     private $products = [];
 
-    public function actionCategory($id)
+    public function actionCategory($categoryId)
     {
         /** @var NestedTreeRepository $repository */
         $repository = $this->entityManager->getRepository(Category::class);
 
-        $category = $repository->find($id);
+        $category = $repository->find($categoryId);
 
         if (!$category) {
-            // todo not found
+            $this->error(sprintf('Category "%s" not found', $categoryId), IResponse::S404_NOT_FOUND);
         }
 
         $this->category = $category;
 
         $productRepo = $this->entityManager->getRepository(Product::class);
 
-        $qb = $productRepo->createQueryBuilder()
+        $this->products = $productRepo->createQueryBuilder()
             ->select('p')
             ->from(Product::class, 'p')
             ->where(':category MEMBER OF p.categories')
-            ->setParameter('category', $category);
-
-        $this->products = $qb->getQuery()->getResult();
-
-        //Debugger::barDump($products);
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getResult();
     }
 
     public function renderCategory()
