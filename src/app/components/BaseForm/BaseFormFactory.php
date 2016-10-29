@@ -2,12 +2,10 @@
 
 namespace App\Components;
 
-use Nette\Application\UI\Form;
 use Nette\Forms\IFormRenderer;
 use Nette\Localization\ITranslator;
-use Tracy\Debugger;
 
-class BaseFormFactory extends Form
+class BaseFormFactory
 {
     /** @var IFormRenderer */
     private $renderer;
@@ -17,8 +15,6 @@ class BaseFormFactory extends Form
 
     public function __construct(IFormRenderer $renderer = null, ITranslator $translator = null)
     {
-        parent::__construct();
-
         $this->renderer = $renderer;
         $this->translator = $translator;
     }

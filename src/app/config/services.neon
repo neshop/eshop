@@ -26,6 +26,7 @@ services:
     - App\Components\CartInfoFactory
     - App\Components\CartFactory
     - App\Components\OrderForm
+    - App\Components\ContactFormFactory
 
     - App\Model\Products\ProductSearchFactory
 
