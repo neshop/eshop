@@ -28,7 +28,7 @@ before_install:
     - composer self-update
 
 install:
-    - composer install --no-interactive --prefer-source
+    - composer install --no-interaction --prefer-source
 
 script:
     - ./src/vendor/bin/phpcs ./src/app/ --standard=psr2 -spn
