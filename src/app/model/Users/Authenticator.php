@@ -34,5 +34,4 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 
         return $user;
     }
-
 }

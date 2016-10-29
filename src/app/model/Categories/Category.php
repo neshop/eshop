@@ -6,9 +6,8 @@ use App\Model\ORM\Attributes\SEO;
 use App\Model\ORM\Attributes\UUID;
 use App\Model\Products\Product;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping AS ORM;
-use Gedmo\Mapping\Annotation AS Gedmo;
-use Kdyby\Doctrine\Entities\Attributes\UniversallyUniqueIdentifier;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Nette\Object;
 use Nette\Utils\ArrayHash;
 

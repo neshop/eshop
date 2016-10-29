@@ -20,7 +20,7 @@ class UsersFixtures extends AbstractFixture implements OrderedFixtureInterface
             'admin@example.com' => '123456'
         ];
 
-        foreach($users as $email => $password) {
+        foreach ($users as $email => $password) {
             $user = new User($email, $password);
             $manager->persist($user);
         }
@@ -37,6 +37,4 @@ class UsersFixtures extends AbstractFixture implements OrderedFixtureInterface
     {
         return 1000;
     }
-
-
 }

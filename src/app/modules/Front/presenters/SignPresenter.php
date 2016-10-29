@@ -8,9 +8,7 @@ use App\Components\LostPasswordFormFactory;
 use App\Components\RegistrationFormFactory;
 use App\Model\Users\User;
 use App\Model\Users\UserRepository;
-use App\Presenters\BasePresenter;
 use Kdyby\Doctrine\EntityManager;
-use Nette\Application\ApplicationException;
 use Nette\Application\UI\Form;
 use Nette\Security\AuthenticationException;
 use Nette\Utils\Strings;
@@ -105,7 +103,6 @@ class SignPresenter extends FrontPresenter
             }
 
             $this->user = $user;
-
         } catch (BadTokenException $e) {
             $this->flashMessage('Neplatný odkaz nebo vypršela platnost odkaz. Zkuste to prosím znovu.', 'danger');
             $this->redirect('Homepage:');
@@ -129,5 +126,3 @@ class SignPresenter extends FrontPresenter
         $this->redirect('Sign:in');
     }
 }
-
-class BadTokenException extends ApplicationException {}

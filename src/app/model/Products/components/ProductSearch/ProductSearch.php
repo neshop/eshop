@@ -7,7 +7,6 @@ use App\Components\BaseFormFactory;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Utils\Strings;
 use Tomaj\Form\Renderer\BootstrapInlineRenderer;
-use Tracy\Debugger;
 
 class ProductSearch extends BaseControl
 {

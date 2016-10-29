@@ -28,5 +28,4 @@ class VatRate
      * @ORM\Column(type="float",nullable=false)
      */
     private $rate;
-
 }
