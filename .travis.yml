@@ -26,7 +26,7 @@ matrix:
 
 before_install:
     - composer self-update
-    - composer require "hirak/prestissimo"
+    - composer global require "hirak/prestissimo"
 
 install:
     - composer install --no-interaction --prefer-source
