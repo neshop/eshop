@@ -24,7 +24,8 @@
 		"tomaj/nette-bootstrap-form": "^1.2"
 	},
 	"require-dev": {
-		"nette/tester": "^1.6"
+		"nette/tester": "^1.6",
+		"squizlabs/php_codesniffer": "^2.7"
 	},
 	"replace": {
 		"nette/nette": "2.3.5"
