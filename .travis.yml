@@ -42,7 +42,9 @@ install:
     - composer install --no-interaction --prefer-dist
 
 before_script:
-    - if [ $TRAVIS_PHP_VERSION == "7.0" ]; then coverage="-p phpdbg --coverage ./coverage.xml --coverage-src ./src"; fi
+    - if [ $TRAVIS_PHP_VERSION == "7.0" ]; then
+       coverage="-p phpdbg --coverage ./coverage.xml --coverage-src ./src/app";
+       fi
 
 script:
     - ./src/vendor/bin/phpcs ./src/app/ --standard=psr2 -spn
