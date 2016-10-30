@@ -8,7 +8,7 @@ php:
 
 env:
     - TESTER_PHP_BIN="php-cgi"
-    - TESTER_PHP_BIN="hhvm"
+    #- TESTER_PHP_BIN="hhvm"
 
 matrix:
     allow_failure:
@@ -21,8 +21,8 @@ matrix:
           env: TESTER_PHP_BIN="hhvm"
         - php: 7.1
           env: TESTER_PHP_BIN="hhvm"
-        - php: hhvm
-          env: TESTER_PHP_BIN="php-cgi"
+        #- php: hhvm
+        #  env: TESTER_PHP_BIN="php-cgi"
 
 services:
     - mysql
