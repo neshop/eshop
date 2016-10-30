@@ -46,7 +46,7 @@ before_script:
 
 script:
     - ./src/vendor/bin/phpcs ./src/app/ --standard=psr2 -spn
-    - ./src/vendor/bin/tester -p $TESTER_PHP_BIN -c ./tests/php.ini -s ./tests/
+    - ./src/vendor/bin/tester -p $TESTER_PHP_BIN -c ./tests/php.ini -s ./tests/ $coverage
 
 after_script:
     - >
