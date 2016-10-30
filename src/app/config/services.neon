@@ -9,27 +9,6 @@ services:
 
     - Tomaj\Form\Renderer\BootstrapVerticalRenderer
 
-    - Analytics\Components\GoogleAnalytics(
-            %debugMode%,
-            %analytics.googleAnalytics.site%,
-            %analytics.googleAnalytics.key%
-        )
-
-    - App\Components\BaseFormFactory
-    - App\Components\RegistrationFormFactory
-    - App\Components\LoginFormFactory
-    - App\Components\ChangePasswordFormFactory
-    - App\Components\LostPasswordFormFactory
-    - App\Components\ProductFormFactory
-    - App\Components\BuyFormFactory
-    - App\Components\CategoryTreeFactory
-    - App\Components\CartInfoFactory
-    - App\Components\CartFactory
-    - App\Components\OrderForm
-    - App\Components\ContactFormFactory
-
-    - App\Model\Products\ProductSearchFactory
-
     - App\Model\LostPasswordResetMessageSender
     - App\Model\MessageSenderSettings('simple-shop', 'info@hc4l.cz', '')
 

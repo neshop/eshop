@@ -1,0 +1,21 @@
+services:
+    - Analytics\Components\GoogleAnalyticsFactory(
+        %debugMode%,
+        %analytics.googleAnalytics.site%,
+        %analytics.googleAnalytics.key%
+    )
+
+    - App\Components\BaseFormFactory
+    - App\Components\RegistrationFormFactory
+    - App\Components\LoginFormFactory
+    - App\Components\ChangePasswordFormFactory
+    - App\Components\LostPasswordFormFactory
+    - App\Components\ProductFormFactory
+    - App\Components\BuyFormFactory
+    - App\Components\CategoryTreeFactory
+    - App\Components\CartInfoFactory
+    - App\Components\CartFactory
+    - App\Components\OrderForm
+    - App\Components\ContactFormFactory
+
+    - App\Model\Products\ProductSearchFactory
