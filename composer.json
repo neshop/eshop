@@ -15,22 +15,26 @@
 		"nette/utils": "^2.3",
 		"latte/latte": "^2.3",
 		"tracy/tracy": "^2.3",
-		"kdyby/doctrine": "^3.0",
+		"kdyby/doctrine": "3.1.2",
 		"majkl578/nette-identity-doctrine": "dev-master",
 		"rixxi/gedmo": "^1.0",
 		"ublaboo/datagrid": "^4.4",
 		"doctrine/data-fixtures": "^1.2",
 		"ramsey/uuid-doctrine": "^1.2",
-		"tomaj/nette-bootstrap-form": "^1.2"
+		"tomaj/nette-bootstrap-form": "^1.2",
+		"kdyby/doctrine-dbal-batchimport": "dev-master"
 	},
 	"require-dev": {
-		"nette/tester": "^1.6",
-		"squizlabs/php_codesniffer": "^2.7"
+		"nette/tester": "2.0.x-dev",
+		"squizlabs/php_codesniffer": "^2.7",
+		"mrtnzlml/testbench": "^2.4",
+		"rixxi/env": "~1.0"
 	},
 	"replace": {
 		"nette/nette": "2.3.5"
 	},
 	"config": {
 		"vendor-dir": "src/vendor"
-	}
+	},
+	"minimum-stability": "stable"
 }
