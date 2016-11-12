@@ -1,5 +1,5 @@
 services:
-    router: App\RouterFactory::createRouter
+    router: App\Router\RouterFactory::createRouter
 
     - App\Model\Users\Authenticator
     - App\Model\Users\UserRepository
@@ -9,8 +9,8 @@ services:
 
     - Tomaj\Form\Renderer\BootstrapVerticalRenderer
 
-    - App\Model\LostPasswordResetMessageSender
-    - App\Model\MessageSenderSettings('simple-shop', 'info@hc4l.cz', '')
+    - App\Model\Users\LostPasswordResetMessageSender
+    - App\Model\Users\MessageSenderSettings('simple-shop', 'info@hc4l.cz', '')
 
     -
         class: App\Model\Fixtures\DefaultData
